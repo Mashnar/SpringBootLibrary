@@ -1,10 +1,9 @@
 package LibraryProject.Library.DB;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -15,6 +14,23 @@ public class User {
     private String name;
 
     private String email;
+
+    private Set<Books> books = new HashSet<Books>(0);
+
+    //relacje
+
+
+
+    public void setBooks(Set<Books> books) {
+        this.books = books;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @Access(AccessType.PROPERTY)
+    @JoinTable(name="user_books", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="books_id"))
+    public Set<Books> getBooks() {
+        return this.books;
+    }
 
     public Integer getId() {
         return id;

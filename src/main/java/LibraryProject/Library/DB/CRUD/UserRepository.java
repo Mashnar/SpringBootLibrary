@@ -1,4 +1,5 @@
-package LibraryProject.Library.DB;
+package LibraryProject.Library.DB.CRUD;
+import LibraryProject.Library.DB.User;
 import org.springframework.data.repository.CrudRepository;
 
 
@@ -7,5 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 // CRUD refers Create, Read, Update, Delete
 
 public interface UserRepository extends CrudRepository<User, Integer> {
+    User getById(Integer id);
 
 }
