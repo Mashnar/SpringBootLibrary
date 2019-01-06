@@ -1,6 +1,10 @@
 package LibraryProject.Library.DB;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,7 +77,13 @@ public class Books {
 
 
     //relacje
+    @Column
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
 
+    @Column
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
 
     private String name;
 
