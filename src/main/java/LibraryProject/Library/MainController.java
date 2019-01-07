@@ -51,6 +51,7 @@ public class MainController {
         booksRepository.save(book);
 
 
+
         return "saved";
     }
 
@@ -68,13 +69,20 @@ public class MainController {
         return null;
     }
 
-
-    @GetMapping(path = "/all")
-    public @ResponseBody
-    String getAllUsers(Model model) {
+    @RequestMapping(value = "all/{id_user}", method = RequestMethod.GET)
+    public String getAllUsers(@PathVariable("id_user") Integer User_ID,Model model) {
         // This returns a JSON or XML with the users
-        Set<Books> book = booksRepository.getBooksPerUser(1);
-        model.addAttribute("student",book);
-        return "redirect:/test";
+        User user = userRepository.findById(User_ID).get();
+        Set<Books> book = booksRepository.getBooksPerUser(user.getId());
+        model.addAttribute("books",book);
+        model.addAttribute("messeges",user);
+        return "test";
+
+    }
+
+
+    @RequestMapping("/test")
+    public String form() {
+        return "index";
     }
 }

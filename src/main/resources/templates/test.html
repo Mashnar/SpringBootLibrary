@@ -1,14 +1,13 @@
-<table class="table table-striped" xmlns:th="http://www.w3.org/1999/xhtml">
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Department</th>
-        <th>Courses</th>
-        <th>Actions</th>
+<table xmlns:th="http://www.w3.org/1999/xhtml" border="solid">
+    <tr th:each="var : ${messeges}">
+        <td th:text="${var.name}"></td>
+        <td th:text="${var.email}"></td>
     </tr>
-    <tr th:each = "student : ${students}">
-        <td th:text="${student.name} + ' ' + ${student.author}"></td>
-
+    <tr th:each="var_1 : ${books}">
+        <td th:text="${var_1.author}"></td>
+        <td th:text="${var_1.name}"></td>
+        <td th:text="${var_1.description}"></td>
 
     </tr>
 </table>
+gdfgdfgdfgdfgdfgdgdfgdfgf
