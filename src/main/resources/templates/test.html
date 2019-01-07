@@ -1,0 +1,14 @@
+<table class="table table-striped" xmlns:th="http://www.w3.org/1999/xhtml">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Courses</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each = "student : ${students}">
+        <td th:text="${student.name} + ' ' + ${student.author}"></td>
+
+
+    </tr>
+</table>

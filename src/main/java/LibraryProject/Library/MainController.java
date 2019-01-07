@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import LibraryProject.Library.DB.User;
 import LibraryProject.Library.DB.CRUD.UserRepository;
 
-import java.util.Optional;
+import java.util.Set;
 
 @Controller    // This means that this class is a Controller //do zmiany pozniej jak ogarne relacje
 // This means URL's start with /demo (after Application path)
@@ -71,9 +71,10 @@ public class MainController {
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Optional<User> getAllUsers() {
+    String getAllUsers(Model model) {
         // This returns a JSON or XML with the users
-        return userRepository.findById(3);
-
+        Set<Books> book = booksRepository.getBooksPerUser(1);
+        model.addAttribute("student",book);
+        return "redirect:/test";
     }
 }

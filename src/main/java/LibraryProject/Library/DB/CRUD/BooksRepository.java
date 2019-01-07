@@ -6,8 +6,12 @@ package LibraryProject.Library.DB.CRUD;
 // CRUD refers Create, Read, Update, Delete
 
 import LibraryProject.Library.DB.Books;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface BooksRepository extends CrudRepository<Books, Integer> {
+import java.util.Set;
 
+public interface BooksRepository extends CrudRepository<Books, Integer> {
+@Query(value = "select * from Books join user_books on Books.Id = user_books.books_id where user_books.user_id=1",nativeQuery = true)
+public Set<Books> getBooksPerUser(int i);
 }
