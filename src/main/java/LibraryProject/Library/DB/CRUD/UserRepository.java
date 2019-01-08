@@ -1,6 +1,7 @@
 package LibraryProject.Library.DB.CRUD;
 import LibraryProject.Library.DB.Books;
 import LibraryProject.Library.DB.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +14,6 @@ import java.util.Set;
 // CRUD refers Create, Read, Update, Delete
 
 @Repository("userRepository")
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmail(String email);
 }

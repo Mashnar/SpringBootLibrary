@@ -3,6 +3,7 @@ package LibraryProject.Library.DB;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -30,8 +31,8 @@ public class User {
 
 
     @Column(name = "email", nullable = false, unique = true)
-    @Email(message = "Please provide a valid e-mail")
-    @NotEmpty(message = "Please provide an e-mail")
+    @Email(message = "*Please provide a valid Email")
+    @NotEmpty(message = "*Please provide an email")
     private String email;
 
 
@@ -80,7 +81,8 @@ public class User {
 
     @Column(name = "password")
     @NotEmpty(message = "Podaj haslo")
-    @Transient
+    @Length(min = 5, message = "*Your password must have at least 5 characters")
+
     private String password;
 
 
@@ -124,6 +126,18 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
 
 }
