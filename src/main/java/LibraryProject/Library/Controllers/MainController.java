@@ -1,4 +1,4 @@
-package LibraryProject.Library;
+package LibraryProject.Library.Controllers;
 
 
 import LibraryProject.Library.DB.Books;
@@ -29,7 +29,7 @@ public class MainController {
 
 
         User n = new User();
-        n.setName(name);
+        n.setFirst_name(name);
         n.setEmail(email);
 
         userRepository.save(n);
@@ -85,4 +85,5 @@ public class MainController {
     public String form() {
         return "index";
     }
+
 }
