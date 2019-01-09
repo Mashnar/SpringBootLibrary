@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -78,6 +79,22 @@ public class LoginController {
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
+    @RequestMapping(value="/user/index", method = RequestMethod.GET)
+    public ModelAndView home_user() {
 
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("user/index");
+        return modelAndView;
+
+    }
+
+    @RequestMapping("/default")
+    public String defaultAfterLogin(HttpServletRequest request) {
+        if (request.isUserInRole("ADMIN"))
+        {
+            return "redirect:/admin/home";
+        }
+        return "redirect:/user/index";
+    }
 }
 
