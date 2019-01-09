@@ -15,7 +15,6 @@ public class Books {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-
     public Set<LibraryProject.Library.DB.User> getUser() {
         return User;
     }

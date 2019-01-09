@@ -26,7 +26,16 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "user_id")
     private Integer id;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+private Set<Personal_Library>personal_library;
 
+    public Set<Personal_Library> getPersonal_library() {
+        return personal_library;
+    }
+
+    public void setPersonal_library(Set<Personal_Library> personal_library) {
+        this.personal_library = personal_library;
+    }
 
     @Column(name = "first_name")
     @NotEmpty(message = "Please provide your first name")
@@ -41,6 +50,9 @@ public class User {
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
+
+
+
 
     public int getActive() {
         return active;

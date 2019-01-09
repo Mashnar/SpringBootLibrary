@@ -3,6 +3,8 @@ package LibraryProject.Library.Controllers;
 
 import LibraryProject.Library.DB.Books;
 import LibraryProject.Library.DB.CRUD.BooksRepository;
+import LibraryProject.Library.DB.CRUD.PersonalLibraryRepository;
+import LibraryProject.Library.DB.Personal_Library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class MainController {
     private UserRepository userRepository;
     @Autowired
     private BooksRepository booksRepository;
+    private PersonalLibraryRepository personal_library;
 
     @RequestMapping(value = "/add_user/{name}/{e_mail}", method = RequestMethod.GET)
     public @ResponseBody
@@ -59,8 +62,6 @@ public class MainController {
     public User setBooks(@PathVariable("id_user") Integer user_id, @PathVariable("id_book") Integer book_id) {
         Books book = booksRepository.findById(book_id).get();
         User user = userRepository.findById(user_id).get();
-
-
         user.getBooks().add(book);
 
         userRepository.save(user);
@@ -76,6 +77,8 @@ public class MainController {
         Set<Books> book = booksRepository.getBooksPerUser(user.getId());
         model.addAttribute("books",book);
         model.addAttribute("messeges",user);
+        Personal_Library book_pers = new Personal_Library();
+
         return "test";
 
     }
