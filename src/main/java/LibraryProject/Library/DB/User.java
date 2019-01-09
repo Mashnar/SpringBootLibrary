@@ -11,13 +11,20 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Integer id;
 
 
@@ -35,7 +42,16 @@ public class User {
     @NotEmpty(message = "*Please provide an email")
     private String email;
 
+    public int getActive() {
+        return active;
+    }
 
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    @Column(name = "active")
+    private int active;
 
 
 
