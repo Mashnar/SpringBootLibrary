@@ -15,6 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -117,10 +119,12 @@ private Set<Personal_Library>personal_library;
     private Set<Books> books = new HashSet<Books>(0);
     @Column
     @CreationTimestamp
+    @DateTimeFormat(pattern = "\"dd/MM/yyyy\"")
     private LocalDateTime createDateTime;
 
     @Column
     @UpdateTimestamp
+    @DateTimeFormat(pattern = "\"dd/MM/yyyy\"")
     private LocalDateTime updateDateTime;
     //relacje
 
