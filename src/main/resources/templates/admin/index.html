@@ -1,0 +1,60 @@
+<head th:replace="fragments/header :: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
+
+<body>
+<nav th:replace="fragments/nav_bar_admin :: navbar_admin" xmlns:th="http://www.w3.org/1999/xhtml"></nav>
+
+
+<br>
+<br>
+<div class="container" >
+    <div class="row">
+        <div class="col-sm-4">
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Lista użytkowników</h5>
+
+                    <p class="card-text">Lista wszystkich użytkowników systemu</p>
+                    <!--suppress XmlUnboundNsPrefix -->
+                    <a th:href="@{/admin/user}" class="card-link">dsd</a>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Wypożyczone książki</h5>
+
+                    <p class="card-text">Kliknij poniżej aby zobaczyć ile książek masz wypożyczonych</p>
+                    <a href="#" class="card-link">KLIK</a>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Historia wypożyczeń</h5>
+
+                    <p class="card-text">Kliknij poniżej aby zobaczyć swoją historie wypożyczonych książek</p>
+                    <a href="#" class="card-link">Card link</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div th:replace="fragments/footer :: footer " xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+</body>
+</html>

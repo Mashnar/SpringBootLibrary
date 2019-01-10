@@ -23,6 +23,7 @@ public class MainController {
     private UserRepository userRepository;
     @Autowired
     private BooksRepository booksRepository;
+    @Autowired
     private PersonalLibraryRepository personal_library;
 
     @RequestMapping(value = "/add_user/{name}/{e_mail}", method = RequestMethod.GET)
@@ -71,13 +72,15 @@ public class MainController {
     }
 
     @RequestMapping(value = "all/{id_user}", method = RequestMethod.GET)
-    public String getAllUsers(@PathVariable("id_user") Integer User_ID,Model model) {
+    public String getAllUsers(@PathVariable("id_user") Integer User_ID,Model model)
+    {
         // This returns a JSON or XML with the users
         User user = userRepository.findById(User_ID).get();
         Set<Books> book = booksRepository.getBooksPerUser(user.getId());
+
         model.addAttribute("books",book);
         model.addAttribute("messeges",user);
-        Personal_Library book_pers = new Personal_Library();
+
 
         return "test";
 

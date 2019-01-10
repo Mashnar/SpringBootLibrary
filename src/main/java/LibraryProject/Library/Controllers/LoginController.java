@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,14 +70,15 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/admin/home", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/index", method = RequestMethod.GET)
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getFirst_name() + " " + user.getLast_name() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("admin/home");
+        modelAndView.setViewName("admin/index");
         return modelAndView;
     }
     @RequestMapping(value="/user/index", method = RequestMethod.GET)
@@ -89,12 +91,21 @@ public class LoginController {
     }
 
     @RequestMapping("/default")
-    public String defaultAfterLogin(HttpServletRequest request) {
+    public String defaultAfterLogin(HttpServletRequest request, Model model) {
         if (request.isUserInRole("ADMIN"))
         {
-            return "redirect:/admin/home";
+            String role = "admin";
+            model.addAttribute("current_role",role);
+            return "redirect:/admin/index";
         }
+        String role = "user";
+        model.addAttribute("current_role",role);
         return "redirect:/user/index";
+    }
+    @RequestMapping("/access-denied")
+    public String Acces_Denied()
+    {
+        return"access-denied";
     }
 }
 

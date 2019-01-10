@@ -1,2 +1,6 @@
 REPLACE INTO `role` VALUES (1,'ROLE_ADMIN');
 REPLACE INTO `role` VALUES (2,'ROLE_USER');
+
+/*REPLACE INTO 'user' VALUES(1,1,CURRENT_TIMESTAMP,'admin@test.pl','admin','admin',md5('admin'),CURRENT_TIMESTAMP);
+REPLACE INTO 'user_role' VALUES (1,1);
+*/

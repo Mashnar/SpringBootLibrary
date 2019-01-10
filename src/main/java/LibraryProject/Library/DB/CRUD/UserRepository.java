@@ -16,4 +16,6 @@ import java.util.Set;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmail(String email);
+    @Query(value = "select * from User u join user_role b on u.user_id = b.user_id where b.role_id = 2",nativeQuery = true)
+    public Set<User> getAllUserWithoutAdmins();
 }

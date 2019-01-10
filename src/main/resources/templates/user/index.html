@@ -1,43 +1,58 @@
 <head th:replace="fragments/header :: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
 
 <body>
-<nav th:replace="fragments/nav_bar :: navbar" xmlns:th="http://www.w3.org/1999/xhtml"></nav>
+<nav th:replace="fragments/nav_bar_user :: navbar_user" xmlns:th="http://www.w3.org/1999/xhtml"></nav>
 
-<main role="main">
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3">Hello, world!</h1>
-            <p>Thichujlled a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+<br>
+<br>
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-4">
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Wypozyczalnia</h5>
+
+                        <p class="card-text">Kliknij poniżej aby zobaczyć jakie ksiązki są na stanie</p>
+                        <a href="#" class="card-link">KLIK </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Wypożyczone książki</h5>
+
+                        <p class="card-text">Kliknij poniżej aby zobaczyć ile książek masz wypożyczonych</p>
+                        <a href="#" class="card-link">KLIK</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Historia wypożyczeń</h5>
+
+                        <p class="card-text">Kliknij poniżej aby zobaczyć swoją historie wypożyczonych książek</p>
+                        <a href="#" class="card-link">Card link</a>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Heading</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div>
-        </div>
 
-        <hr>
 
-    </div> <!-- /container -->
 
-</main>
 
 <div th:replace="fragments/footer :: footer " xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+</body>
+</html>
