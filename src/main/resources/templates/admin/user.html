@@ -20,14 +20,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="var : ${users_var}">
-        <td th:text="${var.id}" scope="row"></td>
+    <tr th:each="var,iterationStatus   : ${users_var}">
+        <td th:text="${iterationStatus.count}" scope="row"></td>
         <td th:text="${var.first_name}"></td>
         <td th:text="${var.last_name}"></td>
         <td th:text="${var.email}"></td>
         <td th:text="${var.createDateTime}"></td>
-        <td th:text="${var.active}"></td>
-        <td th:text="${var.books}"></td>
+        <td th:switch="${var.active}">
+            <span th:case="'1'">Aktywny</span>
+            <span th:case="'0'">Nieaktywny</span>
+        </td>
+        <td>
+            <a href="" th:href="@{/admin/change_stat(id=${var.id})}">Zmień status</a>
+
+
+        </td>
     </tr>
 
     </tbody>

@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <head th:replace="fragments/header :: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
 
 <body>
@@ -16,7 +17,7 @@
 
                     <p class="card-text">Lista wszystkich użytkowników systemu</p>
                     <!--suppress XmlUnboundNsPrefix -->
-                    <a th:href="@{/admin/user}" class="card-link">dsd</a>
+                    <a th:href="@{/admin/user}" class="card-link">Kliknij</a>
 
                 </div>
             </div>
@@ -27,10 +28,11 @@
         <div class="col-sm-4">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Wypożyczone książki</h5>
+                    <h5 class="card-title">Dodaj książke do bazy</h5>
 
-                    <p class="card-text">Kliknij poniżej aby zobaczyć ile książek masz wypożyczonych</p>
-                    <a href="#" class="card-link">KLIK</a>
+                    <p class="card-text">Kliknij poniżej aby dodac ksiazke </p>
+                    <br>
+                    <a th:href="@{/admin/book}" class="card-link">Kliknij</a>
 
                 </div>
             </div>

@@ -64,7 +64,6 @@ public class MainController {
         Books book = booksRepository.findById(book_id).get();
         User user = userRepository.findById(user_id).get();
         user.getBooks().add(book);
-
         userRepository.save(user);
 
 
