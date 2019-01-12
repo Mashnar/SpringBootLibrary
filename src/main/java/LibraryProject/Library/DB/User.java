@@ -40,17 +40,17 @@ private Set<Personal_Library>personal_library;
     }
 
     @Column(name = "first_name")
-    @NotEmpty(message = "Please provide your first name")
+    @NotEmpty(message = "Podaj imię")
     private String first_name;
 
     @Column(name = "last_name")
-    @NotEmpty(message = "Please provide your last name")
+    @NotEmpty(message = "Podaj Nazwisko")
     private String last_name;
 
 
     @Column(name = "email", nullable = false, unique = true)
-    @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
+    @Email(message = "Podaj prawidłowy format maila")
+    @NotEmpty(message = "Podaj maila")
     private String email;
 
 
@@ -111,7 +111,7 @@ private Set<Personal_Library>personal_library;
 
     @Column(name = "password")
     @NotEmpty(message = "Podaj haslo")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
+    @Length(min = 5, message = "Twoje hasło musi mieć conajmniej 5 znaków ")
 
     private String password;
 

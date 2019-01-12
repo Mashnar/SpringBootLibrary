@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <head th:replace="fragments/header :: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
 
 <body>
@@ -15,7 +16,7 @@
                         <h5 class="card-title">Wypozyczalnia</h5>
 
                         <p class="card-text">Kliknij poniżej aby zobaczyć jakie ksiązki są na stanie</p>
-                        <a href="#" class="card-link">KLIK </a>
+                        <a th:href="@{/user/borrow_book}" class="card-link">KLIK </a>
 
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                         <h5 class="card-title">Wypożyczone książki</h5>
 
                         <p class="card-text">Kliknij poniżej aby zobaczyć ile książek masz wypożyczonych</p>
-                        <a href="#" class="card-link">KLIK</a>
+                        <a th:href="@{/user/list_book}" class="card-link">KLIK</a>
 
                     </div>
                 </div>

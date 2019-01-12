@@ -56,14 +56,14 @@ public class LoginController {
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+                            "Istnieje już mail który został podany ");
         }
         if (bindingResult.hasErrors())
         {
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "Użytkownik został zarejestrowany");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("registration");
 
@@ -74,7 +74,7 @@ public class LoginController {
     @RequestMapping(value="/admin/index", method = RequestMethod.GET)
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView();
-     /*   Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+       /* Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getFirst_name() + " " + user.getLast_name() + " (" + user.getEmail() + ")");

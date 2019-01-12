@@ -2,7 +2,8 @@
 <head th:replace="fragments/header :: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
 
 <body>
-<nav th:replace="fragments/nav_bar_admin :: navbar_admin" xmlns:th="http://www.w3.org/1999/xhtml"></nav>
+<nav th:replace="fragments/nav_bar_user :: navbar_user" xmlns:th="http://www.w3.org/1999/xhtml"></nav>
+
 
 
 <br>
@@ -16,9 +17,7 @@
         <th scope="col">Autor</th>
         <th scope="col">Opis</th>
         <th scope="col">Status</th>
-        <th scope="col">Liczba wypożyczeń</th>
-        <th scope="col">Historia wypożyczeń</th>
-
+        <th scope="col">Wypożycz</th>
     </tr>
     </thead>
     <tbody>
@@ -27,27 +26,32 @@
         <td th:text="${var.name}"></td>
         <td th:text="${var.author}"></td>
         <td th:text="${var.description}"></td>
-        <td th:if="${var.borrow}==true">Wypożyczona Przez
-          <!--  <span th:text="$"-->
+        <td th:if="${var.borrow}==true">Wypożyczona
 
         </td>
         <td th:if="${var.borrow}==false">Nie wypożyczona
 
         </td>
-        <td th:text="${var.count_borrow}"></td>
-        <td>
-            <a href="" th:href="@{/admin/history_details}">Szczegóły</a>
-
+        <td th:if="${var.borrow}==false">
+            <a href="" th:href="@{/user/borrow_book_execute(id=${var.id})}">Wypożycz</a>
 
         </td>
+        <td th:if="${var.borrow}==true">
+
+        </td>
+
 
     </tr>
 
     </tbody>
 </table>
-<a href="" th:href="@{/admin/index}">
-<center><button type="button" class="btn btn-dark" >Wróć </button></center>
+
+<a href="" th:href="@{/user/index}">
+    <center><button type="button" class="btn btn-dark" >Wróć </button></center>
 </a>
+
+
+
 
 <div th:replace="fragments/footer :: footer " xmlns:th="http://www.w3.org/1999/xhtml"></div>
 
