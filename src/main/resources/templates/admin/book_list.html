@@ -1,0 +1,53 @@
+<!--suppress ALL -->
+<head th:replace="fragments/header :: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
+
+<body>
+<nav th:replace="fragments/nav_bar_admin :: navbar_admin" xmlns:th="http://www.w3.org/1999/xhtml"></nav>
+
+
+<br>
+<br>
+<table class="table table-bordered" style=" width: 70%;
+  max-width: 70%;  margin: 0 auto;">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Opis</th>
+        <th scope="col">Status</th>
+        <th scope="col">Liczba wypożyczeń</th>
+        <th scope="col">Historia wypożyczeń</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="var,iterationStatus   : ${books}">
+        <td th:text="${iterationStatus.count}" scope="row"></td>
+        <td th:text="${var.name}"></td>
+        <td th:text="${var.author}"></td>
+        <td th:text="${var.description}"></td>
+        <td th:if="${var.borrow}==true">Wypożyczona
+
+        </td>
+        <td th:if="${var.borrow}==false">Nie wypożyczona
+
+        </td>
+        <td th:text="${var.count_borrow}"></td>
+        <td>
+            <a href="" th:href="@{/admin/change_stat}">Szczegóły</a>
+
+
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+
+<div th:replace="fragments/footer :: footer " xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+</body>
+</html>

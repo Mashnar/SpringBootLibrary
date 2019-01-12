@@ -68,12 +68,53 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/book", method = RequestMethod.POST)
-    public ModelAndView createNewBook(@Valid Books book, BindingResult bindingResult) {
+    public ModelAndView createNewBook(@Valid @ModelAttribute("book") Books book,BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        Books book_exist = booksRepository.findByName(book.getName());
+        if (bindingResult.hasErrors())
+        {
+            modelAndView.setViewName("/admin/book");
+
+
+            return  modelAndView;
+        }
+        if(book_exist != null)
+        {
+
+            modelAndView.addObject("messege", 0);
+
+            modelAndView.setViewName("/admin/book");
+
+            return  modelAndView;
+
+        }
+
+
         book.setBorrow(false);
-booksRepository.save(book);
-modelAndView.setViewName("/admin/index");
+
+        booksRepository.save(book);
+        modelAndView.setViewName("/admin/book");
+        Books book_new = new Books();
+        modelAndView.addObject("book", book_new);
+        modelAndView.addObject("messege", 1);
         return  modelAndView;
     }
 
-}
+    @RequestMapping(value = "/admin/book_list", method = RequestMethod.GET)
+    public ModelAndView createNewBook()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        Iterable<Books> books = booksRepository.findAll();
+
+        modelAndView.addObject("books",books);
+        modelAndView.setViewName("/admin/book_list");
+        return modelAndView;
+
+
+
+
+    }
+
+    }
+
+

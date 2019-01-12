@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -83,17 +84,20 @@ public class Books {
     @Column
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
-
+    @Column(name = "name")
+    @NotEmpty(message = "*Podaj Nazwe książki")
     private String name;
-
+    @Column(name = "author")
+    @NotEmpty(message = "*Podaj autora")
     private String author;
-
+    @Column(name = "description")
+    @NotEmpty(message = "*Podaj opis")
     private String description;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Boolean borrow;
 
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Integer count_borrow;
 }

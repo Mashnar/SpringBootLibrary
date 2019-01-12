@@ -13,32 +13,52 @@
                     <h4 class="mb-0">Dodaj książke</h4>
                 </div>
                 <div class="card-body">
-                    <form class="form" role="form" autocomplete="off" action="#" th:action="@{/admin/book}" th:object="${book}" method="post">
+                    <form class="form" role="form" autocomplete="off" action="#" th:action="@{/admin/book}" th:object="${book}" method="post" id="myForm">
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Nazwa książki</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text" th:field="*{name}">
+                                <label
+                                        th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                        class="validation-message"></label>
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Autor</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text" th:field="*{author}" >
+                                <label
+                                        th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+                                        class="validation-message"></label>
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Opis</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" th:field="*{description}" >
+                                <textarea  rows = "5" cols = "49" th:field = "*{description}" form = "myForm" >... </textarea>
+                                <label
+                                        th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                                        class="validation-message"></label>
+
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
-                                <input type="reset" class="btn btn-secondary" value="Cancel">
-                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                                <input type="reset" class="btn btn-secondary" value="Wyczyść">
+                                <input type="submit" class="btn btn-primary" value="Wyślij">
                             </div>
+
+                            <span th:switch="${messege}">
+                                  <center> <span th:case="'1'" class="text-success">Książka została dodana do bazy </span></center>
+                                  <center> <span th:case="'0'" class="text-danger">Istnieje już podana książka</span></center>
+
+
+                            </span>
+
                         </div>
                     </form>
                 </div>
