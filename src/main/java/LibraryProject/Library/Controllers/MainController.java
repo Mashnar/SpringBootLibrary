@@ -86,9 +86,5 @@ public class MainController {
     }
 
 
-    @RequestMapping("/test")
-    public String form() {
-        return "index";
-    }
 
 }

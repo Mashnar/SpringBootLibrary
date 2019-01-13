@@ -1,12 +1,8 @@
 <table xmlns:th="http://www.w3.org/1999/xhtml" border="solid">
     <tr th:each="var : ${messeges}">
-        <td th:text="${var.name}"></td>
-        <td th:text="${var.email}"></td>
+        <td th:text="${var.user.first_name}"></td>
+        <td th:text="${var.books.name}"></td>
+        <td th:text="${var.borrowDate}"></td>
     </tr>
-    <tr th:each="var_1 : ${books}">
-        <td th:text="${var_1.author}"></td>
-        <td th:text="${var_1.name}"></td>
-        <td th:text="${var_1.description}"></td>
 
-    </tr>
 </table>

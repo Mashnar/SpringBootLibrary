@@ -105,8 +105,7 @@ public class AdminController {
     {
         ModelAndView modelAndView = new ModelAndView();
         Iterable<Books> books = booksRepository.findAll();
-
-        modelAndView.addObject("books",books);
+            modelAndView.addObject("books",books);
         modelAndView.setViewName("/admin/book_list");
         return modelAndView;
 
@@ -114,6 +113,9 @@ public class AdminController {
 
 
     }
+
+
+
 
     }
 

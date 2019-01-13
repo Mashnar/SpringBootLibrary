@@ -11,30 +11,31 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "user")
 public class User {
+    public Set<BooksUserHistory> getBooksUserHistories() {
+        return booksUserHistories;
+    }
+
+    public void setBooksUserHistories(Set<BooksUserHistory> booksUserHistories) {
+        this.booksUserHistories = booksUserHistories;
+    }
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "user_id")
+
     private Integer id;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Personal_Library>personal_library;
 
-    public Set<Personal_Library> getPersonal_library() {
-        return personal_library;
-    }
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<BooksUserHistory> booksUserHistories;
 
-    public void setPersonal_library(Set<Personal_Library> personal_library) {
-        this.personal_library = personal_library;
-    }
 
     @Column(name = "first_name")
     @NotEmpty(message = "Podaj imię")
@@ -50,8 +51,53 @@ public class User {
     @NotEmpty(message = "Podaj maila")
     private String email;
 
+    @Column(name = "active")
+    private int active;
 
 
+
+    @Column(name = "password")
+    @NotEmpty(message = "Podaj haslo")
+    @Length(min = 5, message = "Twoje hasło musi mieć conajmniej 5 znaków ")
+
+    private String password;
+
+
+
+    @Column
+    @CreationTimestamp
+    @DateTimeFormat(pattern = "\"dd/MM/yyyy\"")
+    private LocalDateTime createDateTime;
+
+    @Column
+    @UpdateTimestamp
+    @DateTimeFormat(pattern = "\"dd/MM/yyyy\"")
+    private LocalDateTime updateDateTime;
+
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+
+
+
+
+
+
+
+
+
+
+
+    public Set<Personal_Library> getPersonal_library() {
+        return personal_library;
+    }
+
+    public void setPersonal_library(Set<Personal_Library> personal_library) {
+        this.personal_library = personal_library;
+    }
 
     public int getActive() {
         return active;
@@ -61,8 +107,7 @@ public class User {
         this.active = active;
     }
 
-    @Column(name = "active")
-    private int active;
+
 
 
 
@@ -106,24 +151,9 @@ public class User {
         this.updateDateTime = updateDateTime;
     }
 
-    @Column(name = "password")
-    @NotEmpty(message = "Podaj haslo")
-    @Length(min = 5, message = "Twoje hasło musi mieć conajmniej 5 znaków ")
-
-    private String password;
 
 
     private Set<Books> books = new HashSet<Books>(0);
-    @Column
-    @CreationTimestamp
-    @DateTimeFormat(pattern = "\"dd/MM/yyyy\"")
-    private LocalDateTime createDateTime;
-
-    @Column
-    @UpdateTimestamp
-    @DateTimeFormat(pattern = "\"dd/MM/yyyy\"")
-    private LocalDateTime updateDateTime;
-    //relacje
 
 
 
@@ -164,9 +194,7 @@ public class User {
         this.roles = roles;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+
 
 
 }

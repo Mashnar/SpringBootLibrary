@@ -6,16 +6,57 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Books {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "book_id")
     private Integer id;
+
+    public Set<BooksUserHistory> getBooksUserHistories() {
+        return booksUserHistories;
+    }
+
+    public void setBooksUserHistories(Set<BooksUserHistory> booksUserHistories) {
+        this.booksUserHistories = booksUserHistories;
+    }
+
+    @OneToMany(mappedBy = "books", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<BooksUserHistory> booksUserHistories;
+    //relacje
+    @Column
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
+
+    @Column
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
+    @Column(name = "name")
+    @NotEmpty(message = "*Podaj Nazwe książki")
+    private String name;
+    @Column(name = "author")
+    @NotEmpty(message = "*Podaj autora")
+    private String author;
+    @Column(name = "description")
+    @NotEmpty(message = "*Podaj opis")
+    private String description;
+
+    @Column(nullable = false)
+    private Boolean borrow;
+
+
+    @Column(nullable = false)
+    private Integer count_borrow;
+
+
+    @ManyToMany(mappedBy = "books")
+    private Set<User> User;
+
+
+
     public Set<LibraryProject.Library.DB.User> getUser() {
         return User;
     }
@@ -24,8 +65,7 @@ public class Books {
         User = user;
     }
 
-    @ManyToMany(mappedBy = "books")
-    private Set<User> User;
+
 
     public Integer getId() {
         return id;
@@ -76,28 +116,5 @@ public class Books {
     }
 
 
-    //relacje
-    @Column
-    @CreationTimestamp
-    private LocalDateTime createDateTime;
 
-    @Column
-    @UpdateTimestamp
-    private LocalDateTime updateDateTime;
-    @Column(name = "name")
-    @NotEmpty(message = "*Podaj Nazwe książki")
-    private String name;
-    @Column(name = "author")
-    @NotEmpty(message = "*Podaj autora")
-    private String author;
-    @Column(name = "description")
-    @NotEmpty(message = "*Podaj opis")
-    private String description;
-
-    @Column(nullable = false)
-    private Boolean borrow;
-
-
-    @Column(nullable = false)
-    private Integer count_borrow;
 }
