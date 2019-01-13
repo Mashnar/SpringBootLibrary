@@ -91,7 +91,7 @@ public class AdminController {
 
 
         book.setBorrow(false);
-
+    book.setCount_borrow(0);
         booksRepository.save(book);
         modelAndView.setViewName("/admin/book");
         Books book_new = new Books();

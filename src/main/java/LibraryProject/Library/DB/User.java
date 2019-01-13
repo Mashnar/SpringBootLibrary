@@ -29,7 +29,7 @@ public class User {
     @Column(name = "user_id")
     private Integer id;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-private Set<Personal_Library>personal_library;
+    private Set<Personal_Library>personal_library;
 
     public Set<Personal_Library> getPersonal_library() {
         return personal_library;
