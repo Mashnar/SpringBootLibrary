@@ -17,10 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "user")
 public class User {
