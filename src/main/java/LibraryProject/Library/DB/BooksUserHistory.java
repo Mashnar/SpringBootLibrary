@@ -1,5 +1,7 @@
 package LibraryProject.Library.DB;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -53,11 +55,14 @@ public class BooksUserHistory{
     @JoinColumn(name = "book_id",referencedColumnName = "book_id")
     public Books books;
     @Column(name="borrow_date")
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
     Date borrowDate;
     @Column(name="return_date")
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
     Date returnDate;
 
 }
+@Embeddable
 class BooksUserHistoryId implements Serializable
 {
 private int user;

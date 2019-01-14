@@ -16,7 +16,7 @@
         <th scope="col">Autor</th>
         <th scope="col">Opis</th>
         <th scope="col">Status</th>
-        <th scope="col">Liczba wypożyczeń</th>
+        <th scope="col">Ogólna liczba wypożyczeń</th>
         <th scope="col">Historia wypożyczeń</th>
 
     </tr>
@@ -27,7 +27,8 @@
         <td th:text="${var.name}"></td>
         <td th:text="${var.author}"></td>
         <td th:text="${var.description}"></td>
-        <td th:if="${var.borrow}==true">Wypożyczona Przez
+        <td th:if="${var.borrow}==true">Wypożyczona
+
 
           <!--  <span th:text="$"-->
 
@@ -37,7 +38,7 @@
         </td>
         <td th:text="${var.count_borrow}"></td>
         <td>
-            <a href="" th:href="@{/admin/history_details}">Szczegóły</a>
+            <a href="" th:href="@{/admin/history_details(id=${var.id})}">Szczegóły</a>
 
 
         </td>

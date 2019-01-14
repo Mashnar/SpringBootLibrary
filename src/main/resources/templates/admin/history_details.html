@@ -1,0 +1,47 @@
+<!--suppress ALL -->
+<head th:replace="fragments/header :: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
+
+<body>
+<nav th:replace="fragments/nav_bar_admin :: navbar_admin" xmlns:th="http://www.w3.org/1999/xhtml"></nav>
+
+
+<br>
+<br>
+<center><h3><p class="font-weight-bold" th:text="${books.name}"></p></h3></center>
+<table class="table table-bordered" style=" width: 70%;
+  max-width: 70%;  margin: 0 auto;">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Imie </th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Data wypożyczenia</th>
+        <th scope="col">Data oddania</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="var,iterationStatus   : ${history}">
+        <td th:text="${iterationStatus.count}" scope="row"></td>
+        <td th:text="${var.user.first_name}"></td>
+        <td th:text="${var.user.last_name}"></td>
+        <td th:text="${var.borrowDate}"></td>
+        <td th:text="${var.returnDate}"></td>
+
+
+
+
+
+
+    </tr>
+
+    </tbody>
+</table>
+<a href="" th:href="@{/admin/book_list}">
+    <center><button type="button" class="btn btn-dark" >Wróć </button></center>
+</a>
+
+<div th:replace="fragments/footer :: footer " xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+</body>
+</html>

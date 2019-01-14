@@ -23,7 +23,8 @@ import java.util.Date;
 import java.util.Set;
 
 @Controller
-public class UserController {
+public class UserController
+{
 
 
     @Autowired
@@ -37,29 +38,28 @@ public class UserController {
     @Autowired
     BooksUserHistoryRepository booksUserHistoryRepository;
 
-    @RequestMapping(value="/user/borrow_book" , method = RequestMethod.GET)
-    public ModelAndView books()
-    {
+    @RequestMapping(value = "/user/borrow_book", method = RequestMethod.GET)
+    public ModelAndView books() {
         ModelAndView modelAndView = new ModelAndView();
         Iterable<Books> books = booksRepository.findAll();
-        System.out.println(books);
-        modelAndView.addObject("books",books);
+
+        modelAndView.addObject("books", books);
         modelAndView.setViewName("/user/borrow_book");
         return modelAndView;
 
     }
-    @RequestMapping(value="/user/borrow_book_execute" , method = RequestMethod.GET)
-    public String borrow_book(@RequestParam("id") Integer book_id)
-    {
+
+    @RequestMapping(value = "/user/borrow_book_execute", method = RequestMethod.GET)
+    public String borrow_book(@RequestParam("id") Integer book_id) {
         Books book = booksRepository.findById(book_id).get();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+
         BooksUserHistory booksUserHistory = new BooksUserHistory();
 
         booksUserHistory.setUser(user);
         booksUserHistory.setBooks(book);
         booksUserHistory.setBorrowDate(new Date());
-
 
 
         user.getBooks().add(book);
@@ -71,8 +71,7 @@ public class UserController {
         if (counter == null)
         {
             counter = 1;
-        }
-        else
+        } else
         {
             counter = counter + 1;
         }
@@ -85,22 +84,23 @@ public class UserController {
 
     }
 
-    @RequestMapping(value="/user/list_book",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/list_book", method = RequestMethod.GET)
     public ModelAndView book_list()
-        {
+    {
 
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 
-            User user = userService.findUserByEmail(auth.getName());
-            Set<Books> books = user.getBooks();
-            ModelAndView modelAndViev= new ModelAndView();
-            modelAndViev.setViewName("user/list_book");
-            modelAndViev.addObject("books",books);
+        User user = userService.findUserByEmail(auth.getName());
+        Set<Books> books = user.getBooks();
+        ModelAndView modelAndViev = new ModelAndView();
+        modelAndViev.setViewName("user/list_book");
+        modelAndViev.addObject("books", books);
 
-            return modelAndViev;
-        }
-    @RequestMapping(value="/user/return_book",method = RequestMethod.GET)
+        return modelAndViev;
+    }
+
+    @RequestMapping(value = "/user/return_book", method = RequestMethod.GET)
     public String return_book(@RequestParam("id") Integer book_id)
     {
         ModelAndView modelAndView = new ModelAndView();
@@ -112,7 +112,7 @@ public class UserController {
 
         book.setBorrow(false);
         user.getBooks().remove(book);
-        BooksUserHistory booksUserHistory = booksUserHistoryRepository.findByUserIdAndBookID(user.getId(),book.getId());
+        BooksUserHistory booksUserHistory = booksUserHistoryRepository.findByUserIdAndBookID(user.getId(), book.getId());
         booksUserHistory.setReturnDate(new Date());
         booksUserHistoryRepository.save(booksUserHistory);
         userRepository.save(user);
@@ -121,26 +121,44 @@ public class UserController {
     }
 
 
-    @RequestMapping(name = "/user/test",method = RequestMethod.GET)
-    public String form(Model model) {
+    @RequestMapping(value = "/user/history", method = RequestMethod.GET)
+    public ModelAndView get_personal()
+    {
 
-        User user = userRepository.findById(2).get();
-        Personal_Library pers_book = new Personal_Library();
-        pers_book.setAuthor("test");
-        pers_book.setDescription("fkdmifgjsdfsdfsd");
-        pers_book.setName("test_nazwa");
-        pers_book.setUser(user);
-        personalLibraryRepository.save(pers_book);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 
-Set<BooksUserHistory> booksUserHistories =user.getBooksUserHistories();
+        User user = userService.findUserByEmail(auth.getName());
+        ModelAndView modelAndView = new ModelAndView();
+        Set<BooksUserHistory> booksUserHistory = booksUserHistoryRepository.getHistoryPerUser(user.getId());
+        modelAndView.addObject("pers",booksUserHistory);
+        modelAndView.setViewName("/user/history");
 
 
-
-
-model.addAttribute("messeges",booksUserHistories);
-        return "test";
+        return modelAndView;
 
     }
+
+    @RequestMapping(value = "/user/personal",method = RequestMethod.GET)
+    public ModelAndView personal_library()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+
+        User user = userService.findUserByEmail(auth.getName());
+
+        Set<Personal_Library> personal_libraries = user.getPersonal_library();
+
+        modelAndView.addObject("personal_library", personal_libraries);
+        modelAndView.setViewName("/user/personal");
+        return modelAndView;
+
+    }
+
+
+
+
+
 
 }

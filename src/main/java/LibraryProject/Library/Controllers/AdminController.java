@@ -1,8 +1,9 @@
 package LibraryProject.Library.Controllers;
 
 import LibraryProject.Library.DB.Books;
+import LibraryProject.Library.DB.BooksUserHistory;
 import LibraryProject.Library.DB.CRUD.BooksRepository;
-import LibraryProject.Library.DB.CRUD.PersonalLibraryRepository;
+import LibraryProject.Library.DB.CRUD.BooksUserHistoryRepository;
 import LibraryProject.Library.DB.CRUD.UserRepository;
 import LibraryProject.Library.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import LibraryProject.Library.DB.User;
 
+import javax.jws.WebParam;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -27,6 +31,8 @@ public class AdminController {
     private BooksRepository booksRepository;
     @Autowired
     UserService userService;
+    @Autowired
+    BooksUserHistoryRepository booksUserHistoryRepository;
     @RequestMapping(value="/admin/user", method = RequestMethod.GET)
     public ModelAndView getAllUser()
     {
@@ -105,6 +111,7 @@ public class AdminController {
     {
         ModelAndView modelAndView = new ModelAndView();
         Iterable<Books> books = booksRepository.findAll();
+
             modelAndView.addObject("books",books);
         modelAndView.setViewName("/admin/book_list");
         return modelAndView;
@@ -114,6 +121,30 @@ public class AdminController {
 
     }
 
+@RequestMapping(value="/admin/history_details",method = RequestMethod.GET)
+    public ModelAndView get_history_per_book(@RequestParam("id") Integer book_id)
+    {
+        Books books = booksRepository.findById(book_id).get();
+          Set<BooksUserHistory> booksUserHistories = booksUserHistoryRepository.getHistoryPerBook(book_id);
+
+ModelAndView modelAndView = new ModelAndView();
+modelAndView.addObject("books",books);
+modelAndView.addObject("history",booksUserHistories);
+modelAndView.setViewName("admin/history_details");
+return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/history",method=RequestMethod.GET)
+            public ModelAndView get_history()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        List<BooksUserHistory> booksUserHistory = booksUserHistoryRepository.findAll();
+        modelAndView.addObject("books_history",booksUserHistory);
+        modelAndView.setViewName("/admin/history");
+
+
+        return modelAndView;
+    }
 
 
 

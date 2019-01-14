@@ -15,23 +15,20 @@
         <th scope="col">#</th>
         <th scope="col">Nazwa</th>
         <th scope="col">Autor</th>
-        <th scope="col">Opis</th>
-
-        <th scope="col">Oddaj</th>
+        <th scope="col">Data wypożyczenia</th>
+        <th scope="col">Data oddania</th>
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="var,iterationStatus   : ${books}">
+    <tr th:each="var,iterationStatus   : ${pers}">
         <td th:text="${iterationStatus.count}" scope="row"></td>
-        <td th:text="${var.name}"></td>
-        <td th:text="${var.author}"></td>
-        <td th:text="${var.description}"></td>
+        <td th:text="${var.books.name}"></td>
+        <td th:text="${var.books.author}"></td>
+        <td th:text="${var.borrowDate}"></td>
+        <td th:text="${var.returnDate}"></td>
 
-        <td>
-            <a href="" th:href="@{/user/return_book(id=${var.id})}">Oddaj</a>
 
-        </td>
 
     </tr>
 

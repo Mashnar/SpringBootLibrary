@@ -13,25 +13,21 @@
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Nazwa</th>
+        <th scope="col">Nazwa książki</th>
         <th scope="col">Autor</th>
         <th scope="col">Opis</th>
 
-        <th scope="col">Oddaj</th>
 
     </tr>
     </thead>
     <tbody>
-    <tr th:each="var,iterationStatus   : ${books}">
+    <tr th:each="var,iterationStatus   : ${personal_library}">
         <td th:text="${iterationStatus.count}" scope="row"></td>
         <td th:text="${var.name}"></td>
         <td th:text="${var.author}"></td>
         <td th:text="${var.description}"></td>
 
-        <td>
-            <a href="" th:href="@{/user/return_book(id=${var.id})}">Oddaj</a>
 
-        </td>
 
     </tr>
 
@@ -40,6 +36,9 @@
 
 <a href="" th:href="@{/user/index}">
     <center><button type="button" class="btn btn-dark" >Wróć </button></center>
+</a>
+<a href="" th:href="@{/user/add_personal_book}">
+    <center><button type="button" class="btn btn-warning" >Dodaj nowa książke </button></center>
 </a>
 
 

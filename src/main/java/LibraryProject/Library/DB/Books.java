@@ -40,8 +40,9 @@ public class Books {
     @Column(name = "author")
     @NotEmpty(message = "*Podaj autora")
     private String author;
-    @Column(name = "description")
+    @Column(name = "description",columnDefinition="TEXT")
     @NotEmpty(message = "*Podaj opis")
+
     private String description;
 
     @Column(nullable = false)
