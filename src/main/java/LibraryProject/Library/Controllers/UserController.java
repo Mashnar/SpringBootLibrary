@@ -14,11 +14,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.Set;
 
@@ -152,6 +155,44 @@ public class UserController
 
         modelAndView.addObject("personal_library", personal_libraries);
         modelAndView.setViewName("/user/personal");
+        return modelAndView;
+
+    }
+    @RequestMapping(value = "/user/add_personal_book",method = RequestMethod.GET)
+    public ModelAndView add_personal_book()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        Personal_Library book = new Personal_Library();
+        modelAndView.addObject("book",book);
+        modelAndView.setViewName("/user/add_personal_book");
+        return modelAndView;
+    }
+    @RequestMapping(value = "/user/add_personal_book",method = RequestMethod.POST)
+    public ModelAndView send_personal_book(@Valid @ModelAttribute("book") Personal_Library personal_library, BindingResult bindingResult)
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+
+        User user = userService.findUserByEmail(auth.getName());
+        ModelAndView modelAndView = new ModelAndView();
+        Personal_Library personal_library_exist = personalLibraryRepository.getBooksWithNameAndUserID(user.getId(),personal_library.getName());
+        if(bindingResult.hasErrors())
+        {
+            modelAndView.setViewName("/user/add_personal_book");
+            return modelAndView;
+        }
+        if(personal_library_exist!=null)
+        {
+            modelAndView.addObject("messege", 0);
+            modelAndView.setViewName("/user/add_personal_book");
+            return modelAndView;
+        }
+
+        personal_library.setUser(user);
+        personalLibraryRepository.save(personal_library);
+Personal_Library new_personal=new Personal_Library();
+modelAndView.addObject("book",new_personal);
+modelAndView.setViewName("redirect:/user/personal");
         return modelAndView;
 
     }

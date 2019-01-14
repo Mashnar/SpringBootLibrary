@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 import java.time.LocalDateTime;
 
@@ -86,11 +87,14 @@ private User user;
 
 
 
-
+    @Column(name = "name")
+    @NotEmpty(message = "*Podaj Nazwe książki")
         private String name;
-
+    @Column(name = "author")
+    @NotEmpty(message = "*Podaj Autora")
         private String author;
-
+    @Column(name = "description")
+    @NotEmpty(message = "*Podaj Opis")
         private String description;
         @Column
         @CreationTimestamp
