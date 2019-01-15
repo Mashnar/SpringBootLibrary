@@ -190,12 +190,36 @@ public class UserController
 
         personal_library.setUser(user);
         personalLibraryRepository.save(personal_library);
-Personal_Library new_personal=new Personal_Library();
-modelAndView.addObject("book",new_personal);
-modelAndView.setViewName("redirect:/user/personal");
+        Personal_Library new_personal=new Personal_Library();
+        modelAndView.addObject("book",new_personal);
+        modelAndView.setViewName("redirect:/user/personal");
         return modelAndView;
 
     }
+    @RequestMapping(value = "/user/delete",method = RequestMethod.GET)
+    public ModelAndView delete_book_from_personal(@RequestParam("id") Integer book_id)
+    {
+
+       /* Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+
+        User user = userService.findUserByEmail(auth.getName());*/
+
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        Personal_Library books = personalLibraryRepository.findById(book_id).get();
+        books.setUser(null);
+
+        personalLibraryRepository.saveAndFlush(books);
+
+        personalLibraryRepository.delete(books);
+
+modelAndView.setViewName("redirect:/user/personal");
+
+        return modelAndView;
+    }
+
 
 
 

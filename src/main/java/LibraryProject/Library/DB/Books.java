@@ -11,6 +11,19 @@ import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Books {
+    public Books(@NotEmpty(message = "*Podaj Nazwe książki") String name, @NotEmpty(message = "*Podaj autora") String author, @NotEmpty(message = "*Podaj opis") String description, Boolean borrow, Integer count_borrow) {
+        this.name = name;
+        this.author = author;
+        this.description = description;
+        this.borrow = borrow;
+        this.count_borrow = count_borrow;
+    }
+    public Books()
+    {
+
+    }
+
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "book_id")
