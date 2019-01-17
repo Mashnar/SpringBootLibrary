@@ -29,7 +29,7 @@ public class Personal_Library {
         this.user = user;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)//robi joiny
 @JoinColumn(name = "user_id")
 private User user;
         public Integer getId() {

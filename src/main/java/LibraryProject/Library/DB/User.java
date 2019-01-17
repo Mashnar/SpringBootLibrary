@@ -33,7 +33,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Personal_Library>personal_library;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)//cascadetype to znaczy ze wszystkie operacje moga byc wykonywane (PERSIST, REMOVE, REFRESH, MERGE, DETACH) dla danej relacji i encji
     private Set<BooksUserHistory> booksUserHistories;
 
 
@@ -162,7 +162,7 @@ public class User {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @Access(AccessType.PROPERTY)
+    @Access(AccessType.PROPERTY)//wola getter i setter zeby uzyskac dostep przed insertem badz updatem
     @JoinTable(name="user_books", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="books_id"))
     public Set<Books> getBooks() {
         return this.books;

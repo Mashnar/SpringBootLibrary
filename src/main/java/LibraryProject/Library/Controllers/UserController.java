@@ -69,7 +69,7 @@ public class UserController
         user.getBooksUserHistories().add(booksUserHistory);
 
 
-        //book.getBooksUserHistories().add(booksUserHistory);
+
         Integer counter = book.getCount_borrow();
         if (counter == null)
         {
@@ -200,10 +200,6 @@ public class UserController
     public ModelAndView delete_book_from_personal(@RequestParam("id") Integer book_id)
     {
 
-       /* Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-
-        User user = userService.findUserByEmail(auth.getName());*/
 
 
         ModelAndView modelAndView = new ModelAndView();

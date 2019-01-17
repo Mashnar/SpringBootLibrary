@@ -8,10 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "role")
 public class Role {
     @Id
